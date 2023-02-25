@@ -1,0 +1,373 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+02/25/2023   2:34 AM
+
+INPUT INSTRUCTIONS
+
+  title: MNLFA on LSAC;
+    data: file is 'LSAC_monograph.csv';
+    !variable names given here only (not in data file)
+    variable: names are
+    hicid cohort wave  aweight aweights stratum  pcodes zf12m2
+    ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+    usevariables = Item1 Item2 Item3 Item4 Item5 Item6
+    male dad age100;
+    categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+    constraint are male dad age100;
+    missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+    weight=aweight; ! sample weights
+    stratification=stratum; ! stratum & postal code are used to account for sample design
+    cluster=pcodes;
+    define:
+    age100 = ascagew/100;
+    dad = 2-(mom+1);
+    analysis:
+    type = complex;
+    algorithm = integration;
+    model:
+
+    f BY item1*(L1);
+    f BY item2*(L2);
+    f BY item3*(L3);
+    f BY item4*(L4);
+    f BY item5*(L5);
+    f BY item6*(L6);
+
+    !item1 ON male dad age100;
+    item2 ON male dad age100;
+    !item3 ON male dad age100;
+    !item4 ON male dad age100;
+    !item5 ON male dad age100;
+    !item6 ON male dad age100;
+
+    [f@0];
+    f@1;
+
+  model constraint:
+    new(
+    !L10 L11 L12 L13
+    L20 L21 L22 L23
+    !L30 L31 L32 L33
+    !L40 L41 L42 L43
+    !L50 L51 L52 L53
+    !L60 L61 L62 L63
+    );
+
+    !L1 = L10 + L11*male + L12*dad + L13*age100;
+    L2 = L20 + L21*male + L22*dad + L23*age100;
+    !L3 = L30 + L31*male + L32*dad + L33*age100;
+    !L4 = L40 + L41*male + L42*dad + L43*age100;
+    !L5 = L50 + L51*male + L52*dad + L53*age100;
+    !L6 = L60 + L61*male + L62*dad + L63*age100;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  761
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+MNLFA on LSAC;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4275
+
+Number of dependent variables                                    6
+Number of independent variables                                  3
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   ITEM1       ITEM2       ITEM3       ITEM4       ITEM5       ITEM6
+
+Observed independent variables
+   MALE        DAD         AGE100
+
+Continuous latent variables
+   F
+
+Variables with special functions
+
+  Stratification        STRATUM
+  Cluster variable      PCODES
+  Weight variable       AWEIGHT
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            1
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  LSAC_monograph.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             9
+     Number of y missing data patterns           0
+     Number of u missing data patterns           9
+     Number of strata                           23
+     Number of clusters                        293
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              ITEM1         ITEM2         ITEM3         ITEM4         ITEM5
+              ________      ________      ________      ________      ________
+ ITEM1          1.000
+ ITEM2          0.999         0.999
+ ITEM3          0.996         0.996         0.996
+ ITEM4          0.997         0.997         0.994         0.997
+ ITEM5          0.997         0.997         0.994         0.995         0.997
+ ITEM6          0.999         0.998         0.996         0.997         0.996
+
+
+           Covariance Coverage
+              ITEM6
+              ________
+ ITEM6          0.999
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    ITEM1
+      Category 1    0.014           59.603
+      Category 2    0.213          909.167
+      Category 3    0.773         3305.380
+    ITEM2
+      Category 1    0.061          262.561
+      Category 2    0.422         1802.066
+      Category 3    0.517         2208.357
+    ITEM3
+      Category 1    0.017           71.753
+      Category 2    0.039          164.410
+      Category 3    0.146          622.482
+      Category 4    0.397         1691.457
+      Category 5    0.401         1708.188
+    ITEM4
+      Category 1    0.093          397.602
+      Category 2    0.497         2118.733
+      Category 3    0.410         1747.545
+    ITEM5
+      Category 1    0.067          285.358
+      Category 2    0.400         1706.668
+      Category 3    0.533         2270.071
+    ITEM6
+      Category 1    0.057          242.034
+      Category 2    0.349         1488.943
+      Category 3    0.595         2538.554
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     MALE                  0.512      -0.048       0.000   48.80%       0.000      0.000      1.000
+            4275.000       0.250      -1.998       1.000   51.20%       1.000      1.000
+     DAD                   0.410       0.364       0.000   58.22%       0.000      0.000      0.000
+            4275.000       0.242      -1.867       1.000   41.78%       1.000      1.000
+     AGE100                0.401       0.180       0.140    0.16%       0.300      0.370      0.400
+            4275.000       0.013      -0.013       1.030    0.02%       0.420      0.490
+
+
+     WARNING:  THE VARIANCE CONTRIBUTION FROM A STRATUM WITH A SINGLE CLUSTER
+     (PSU) IS BASED ON THE DIFFERENCE BETWEEN THE SINGLE CLUSTER VALUE AND
+     THE OVERALL CLUSTER MEAN.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       26
+
+Loglikelihood
+
+          H0 Value                      -18665.438
+          H0 Scaling Correction Factor      1.1651
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   37382.876
+          Bayesian (BIC)                 37548.250
+          Sample-Size Adjusted BIC       37465.633
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ F        BY
+    ITEM1              2.927      0.145     20.194      0.000
+    ITEM2            999.000      0.000    999.000    999.000
+    ITEM3              1.936      0.067     28.694      0.000
+    ITEM4              3.062      0.119     25.678      0.000
+    ITEM5              2.139      0.084     25.336      0.000
+    ITEM6              1.938      0.082     23.727      0.000
+
+ ITEM2      ON
+    MALE              -0.028      0.094     -0.296      0.767
+    DAD                0.046      0.102      0.453      0.651
+    AGE100             1.144      0.485      2.358      0.018
+
+ Means
+    F                  0.000      0.000    999.000    999.000
+
+ Thresholds
+    ITEM1$1           -7.459      0.287    -26.004      0.000
+    ITEM1$2           -2.579      0.120    -21.484      0.000
+    ITEM2$1           -4.133      0.240    -17.223      0.000
+    ITEM2$2            0.279      0.205      1.363      0.173
+    ITEM3$1           -5.621      0.183    -30.758      0.000
+    ITEM3$2           -4.191      0.126    -33.353      0.000
+    ITEM3$3           -2.231      0.082    -27.280      0.000
+    ITEM3$4            0.595      0.060      9.892      0.000
+    ITEM4$1           -4.607      0.154    -29.873      0.000
+    ITEM4$2            0.745      0.080      9.281      0.000
+    ITEM5$1           -4.104      0.122    -33.556      0.000
+    ITEM5$2           -0.251      0.063     -3.964      0.000
+    ITEM6$1           -4.110      0.114    -36.028      0.000
+    ITEM6$2           -0.640      0.062    -10.393      0.000
+
+ Variances
+    F                  1.000      0.000    999.000    999.000
+
+New/Additional Parameters
+    L20                2.468      0.288      8.564      0.000
+    L21               -0.194      0.117     -1.653      0.098
+    L22                0.111      0.139      0.797      0.425
+    L23               -0.045      0.653     -0.068      0.945
+
+
+LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+                                         (Est. - 1) Two-Tailed
+                    Estimate       S.E.     / S.E.    P-Value
+
+ ITEM2      ON
+    MALE               0.972      0.092     -0.300      0.764
+    DAD                1.047      0.106      0.443      0.658
+    AGE100             3.139      1.523      1.405      0.160
+
+
+BRANT WALD TEST FOR PROPORTIONAL ODDS
+
+                                   Degrees of
+                      Chi-Square     Freedom   P-Value
+
+  ITEM1
+    Overall test           9.669         3      0.022
+    MALE                   8.221         1      0.004
+    DAD                    1.334         1      0.248
+    AGE100                 0.235         1      0.628
+
+  ITEM2
+    Overall test          15.385         3      0.002
+    MALE                   1.635         1      0.201
+    DAD                    9.001         1      0.003
+    AGE100                 5.267         1      0.022
+
+  ITEM3
+    Overall test          48.020         9      0.000
+    MALE                   1.315         3      0.725
+    DAD                   43.831         3      0.000
+    AGE100                 3.113         3      0.375
+
+  ITEM4
+    Overall test          25.188         3      0.000
+    MALE                   0.284         1      0.594
+    DAD                   12.699         1      0.000
+    AGE100                12.768         1      0.000
+
+  ITEM5
+    Overall test          51.727         3      0.000
+    MALE                   1.765         1      0.184
+    DAD                   42.329         1      0.000
+    AGE100                 9.014         1      0.003
+
+  ITEM6
+    Overall test          27.732         3      0.000
+    MALE                   0.364         1      0.546
+    DAD                   23.250         1      0.000
+    AGE100                 4.699         1      0.030
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.886E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  02:34:43
+        Ending Time:  02:34:54
+       Elapsed Time:  00:00:11
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen

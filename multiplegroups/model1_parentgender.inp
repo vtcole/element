@@ -1,0 +1,97 @@
+title: MNLFA on LSAC;
+  data: file is 'LSAC_monograph.csv';
+  !variable names given here only (not in data file)
+  variable: names are
+  hicid cohort wave  aweight aweights stratum  pcodes zf12m2 
+  ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+  usevariables = Item1 Item2 Item3 Item4 Item5 Item6;
+  categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+  class is c(2);
+  knownclass is c(mom=1 mom=0);
+  missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+  weight=aweight; ! sample weights
+  stratification=stratum; ! stratum & postal code are used to account for sample design
+  cluster=pcodes;
+  analysis: 
+  type = mixture complex;
+  algorithm = integration;
+  model:
+  
+  %OVERALL%
+  f BY item1*(L1);
+  f BY item2;
+  f BY item3;
+  f BY item4;
+  f BY item5;
+  f BY item6;
+  
+  [item1$1] (T1_1); 
+  [item1$2] (T1_2);
+  [item2$1];
+  [item2$2];
+  [item3$1];
+  [item3$2];
+  [item3$3];
+  [item3$4];
+  [item4$1];
+  [item4$2];
+  [item5$1];
+  [item5$2];
+  [item6$1];
+  [item6$2];
+
+  [f];
+  f;
+
+  %c#1%
+  f BY item1*(L1);
+  f BY item2*(L_21);
+  f BY item3*(L_31);
+  f BY item4*(L_41);
+  f BY item5*(L_51);
+  f BY item6*(L_61);
+  
+  [item1$1] (T1_1);
+  [item1$2] (T1_2);
+  [item2$1] (T2_1_1);
+  [item2$2] (T2_2_1);
+  [item3$1] (T3_1_1);
+  [item3$2] (T3_2_1);
+  [item3$3] (T3_3_1);
+  [item3$4] (T3_4_1);
+  [item4$1] (T4_1_1);
+  [item4$2] (T4_2_1);
+  [item5$1] (T5_1_1);
+  [item5$2] (T5_2_1);
+  [item6$1] (T6_1_1);
+  [item6$2] (T6_2_1);
+
+  [f@0];
+  f@1;
+
+ %c#2% 
+  f BY item1*(L1);
+  f BY item2*(L_22);
+  f BY item3*(L_32);
+  f BY item4*(L_42);
+  f BY item5*(L_52);
+  f BY item6*(L_62);
+
+  [item1$1] (T1_1);
+  [item1$2] (T1_2);
+  [item2$1] (T2_1_2);
+  [item2$2] (T2_2_2);
+  [item3$1] (T3_1_2);
+  [item3$2] (T3_2_2);
+  [item3$3] (T3_3_2);
+  [item3$4] (T3_4_2);
+  [item4$1] (T4_1_2);
+  [item4$2] (T4_2_2);
+  [item5$1] (T5_1_2);
+  [item5$2] (T5_2_2);
+  [item6$1] (T6_1_2);
+  [item6$2] (T6_2_2);
+
+  [f];
+  f;
+

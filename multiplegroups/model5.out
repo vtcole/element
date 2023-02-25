@@ -1,0 +1,355 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+02/23/2023   8:31 PM
+
+INPUT INSTRUCTIONS
+
+  title: MNLFA on LSAC;
+    data: file is 'LSAC_monograph.csv';
+    !variable names given here only (not in data file)
+    variable: names are
+    hicid cohort wave  aweight aweights stratum  pcodes zf12m2
+    ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+    usevariables = Item1 Item2 Item3 Item4 Item5 Item6;
+    categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+    class is c(2);
+    knownclass is c(male=0 male=1);
+    missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+    weight=aweight; ! sample weights
+    stratification=stratum; ! stratum & postal code are used to account for sample design
+    cluster=pcodes;
+    analysis:
+    type = mixture complex;
+    algorithm = integration;
+    model:
+
+    %OVERALL%
+    f BY item1;
+    f BY item2;
+    f BY item3;
+    f BY item4;
+    f BY item5;
+    f BY item6;
+
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  761
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+MNLFA on LSAC;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4275
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   ITEM1       ITEM2       ITEM3       ITEM4       ITEM5       ITEM6
+
+Continuous latent variables
+   F
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Stratification        STRATUM
+  Cluster variable      PCODES
+  Weight variable       AWEIGHT
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            1
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  LSAC_monograph.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             9
+     Number of y missing data patterns           0
+     Number of u missing data patterns           9
+     Number of strata                           23
+     Number of clusters                        293
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              ITEM1         ITEM2         ITEM3         ITEM4         ITEM5
+              ________      ________      ________      ________      ________
+ ITEM1          1.000
+ ITEM2          0.999         0.999
+ ITEM3          0.996         0.996         0.996
+ ITEM4          0.997         0.997         0.994         0.997
+ ITEM5          0.997         0.997         0.994         0.995         0.997
+ ITEM6          0.999         0.998         0.996         0.997         0.996
+
+
+           Covariance Coverage
+              ITEM6
+              ________
+ ITEM6          0.999
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    ITEM1
+      Category 1    0.014           59.603
+      Category 2    0.213          909.167
+      Category 3    0.773         3305.380
+    ITEM2
+      Category 1    0.061          262.561
+      Category 2    0.422         1802.066
+      Category 3    0.517         2208.357
+    ITEM3
+      Category 1    0.017           71.753
+      Category 2    0.039          164.410
+      Category 3    0.146          622.482
+      Category 4    0.397         1691.457
+      Category 5    0.401         1708.188
+    ITEM4
+      Category 1    0.093          397.602
+      Category 2    0.497         2118.733
+      Category 3    0.410         1747.545
+    ITEM5
+      Category 1    0.067          285.358
+      Category 2    0.400         1706.668
+      Category 3    0.533         2270.071
+    ITEM6
+      Category 1    0.057          242.034
+      Category 2    0.349         1488.943
+      Category 3    0.595         2538.554
+
+
+
+     WARNING:  THE VARIANCE CONTRIBUTION FROM A STRATUM WITH A SINGLE CLUSTER
+     (PSU) IS BASED ON THE DIFFERENCE BETWEEN THE SINGLE CLUSTER VALUE AND
+     THE OVERALL CLUSTER MEAN.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       22
+
+Loglikelihood
+
+          H0 Value                      -21634.243
+          H0 Scaling Correction Factor      1.1652
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   43312.486
+          Bayesian (BIC)                 43452.418
+          Sample-Size Adjusted BIC       43382.511
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes**
+
+          Pearson Chi-Square
+
+          Value                           3116.034
+          Degrees of Freedom                  2385
+          P-Value                           0.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                           1765.747
+          Degrees of Freedom                  2385
+          P-Value                           1.0000
+
+** Of the 3207 cells in the latent class indicator table, 10
+   were deleted in the calculation of chi-square due to extreme values.
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                            761.713
+          Degrees of Freedom                  3967
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            299.795
+          Degrees of Freedom                  3967
+          P-Value                           1.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       2086.21485          0.48800
+       2       2188.78515          0.51200
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (0)
+
+ F        BY
+    ITEM1              1.000      0.000    999.000    999.000
+    ITEM2              0.820      0.042     19.694      0.000
+    ITEM3              0.662      0.038     17.439      0.000
+    ITEM4              1.049      0.066     15.909      0.000
+    ITEM5              0.735      0.048     15.147      0.000
+    ITEM6              0.665      0.042     15.994      0.000
+
+ Means
+    F                 -0.046      0.109     -0.422      0.673
+
+ Thresholds
+    ITEM1$1           -7.475      0.293    -25.508      0.000
+    ITEM1$2           -2.595      0.132    -19.723      0.000
+    ITEM2$1           -4.577      0.150    -30.492      0.000
+    ITEM2$2           -0.199      0.075     -2.657      0.008
+    ITEM3$1           -5.635      0.188    -30.017      0.000
+    ITEM3$2           -4.204      0.132    -31.793      0.000
+    ITEM3$3           -2.243      0.090    -24.842      0.000
+    ITEM3$4            0.579      0.068      8.466      0.000
+    ITEM4$1           -4.631      0.167    -27.802      0.000
+    ITEM4$2            0.721      0.093      7.789      0.000
+    ITEM5$1           -4.127      0.126    -32.882      0.000
+    ITEM5$2           -0.268      0.071     -3.763      0.000
+    ITEM6$1           -4.130      0.120    -34.407      0.000
+    ITEM6$2           -0.656      0.067     -9.713      0.000
+
+ Variances
+    F                  8.518      0.834     10.217      0.000
+
+Latent Class 2 (1)
+
+ F        BY
+    ITEM1              1.000      0.000    999.000    999.000
+    ITEM2              0.820      0.042     19.694      0.000
+    ITEM3              0.662      0.038     17.439      0.000
+    ITEM4              1.049      0.066     15.909      0.000
+    ITEM5              0.735      0.048     15.147      0.000
+    ITEM6              0.665      0.042     15.994      0.000
+
+ Means
+    F                  0.000      0.000    999.000    999.000
+
+ Thresholds
+    ITEM1$1           -7.475      0.293    -25.508      0.000
+    ITEM1$2           -2.595      0.132    -19.723      0.000
+    ITEM2$1           -4.577      0.150    -30.492      0.000
+    ITEM2$2           -0.199      0.075     -2.657      0.008
+    ITEM3$1           -5.635      0.188    -30.017      0.000
+    ITEM3$2           -4.204      0.132    -31.793      0.000
+    ITEM3$3           -2.243      0.090    -24.842      0.000
+    ITEM3$4            0.579      0.068      8.466      0.000
+    ITEM4$1           -4.631      0.167    -27.802      0.000
+    ITEM4$2            0.721      0.093      7.789      0.000
+    ITEM5$1           -4.127      0.126    -32.882      0.000
+    ITEM5$2           -0.268      0.071     -3.763      0.000
+    ITEM6$1           -4.130      0.120    -34.407      0.000
+    ITEM6$2           -0.656      0.067     -9.713      0.000
+
+ Variances
+    F                  8.518      0.834     10.217      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1               -0.048      0.032     -1.517      0.129
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.167E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for Mixture analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  20:31:55
+        Ending Time:  20:31:56
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen

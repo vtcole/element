@@ -1,0 +1,540 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+02/25/2023   2:35 AM
+
+INPUT INSTRUCTIONS
+
+  title: MNLFA on LSAC;
+    data: file is 'LSAC_monograph.csv';
+    !variable names given here only (not in data file)
+    variable: names are
+    hicid cohort wave  aweight aweights stratum  pcodes zf12m2
+    ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+    usevariables = Item1 Item2 Item3 Item4 Item5 Item6;
+    categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+    class is c(4);
+    knownclass is c(agegroup=1 agegroup=2 agegroup=3 agegroup=4);
+    missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+    weight=aweight; ! sample weights
+    stratification=stratum; ! stratum & postal code are used to account for sample design
+    cluster=pcodes;
+    analysis:
+    type = mixture complex;
+    algorithm = integration;
+    model:
+
+    %OVERALL%
+    f BY item1*(L1);
+    f BY item2;
+    f BY item3;
+    f BY item4;
+    f BY item5;
+    f BY item6;
+
+    [item1$1] (T1_1);
+    [item1$2] (T1_2);
+    [item2$1];
+    [item2$2];
+    [item3$1];
+    [item3$2];
+    [item3$3];
+    [item3$4];
+    [item4$1];
+    [item4$2];
+    [item5$1];
+    [item5$2];
+    [item6$1];
+    [item6$2];
+
+    [f];
+    f;
+
+    %c#1%
+    f BY item1*(L1);
+    f BY item2*(L_21);
+    f BY item3*(L_31);
+    f BY item4*(L_41);
+    f BY item5*(L_51);
+    f BY item6*(L_61);
+
+    [item1$1] (T1_1);
+    [item1$2] (T1_2);
+    [item2$1] (T2_1_1);
+    [item2$2] (T2_2_1);
+    [item3$1] (T3_1_1);
+    [item3$2] (T3_2_1);
+    [item3$3] (T3_3_1);
+    [item3$4] (T3_4_1);
+    [item4$1] (T4_1_1);
+    [item4$2] (T4_2_1);
+    [item5$1] (T5_1_1);
+    [item5$2] (T5_2_1);
+    [item6$1] (T6_1_1);
+    [item6$2] (T6_2_1);
+
+    [f@0];
+    f@1;
+
+   %c#2%
+    f BY item1*(L1);
+    f BY item2*(L_22);
+    f BY item3*(L_32);
+    f BY item4*(L_42);
+    f BY item5*(L_52);
+    f BY item6*(L_62);
+
+    [item1$1] (T1_1);
+    [item1$2] (T1_2);
+    [item2$1] (T2_1_2);
+    [item2$2] (T2_2_2);
+    [item3$1] (T3_1_2);
+    [item3$2] (T3_2_2);
+    [item3$3] (T3_3_2);
+    [item3$4] (T3_4_2);
+    [item4$1] (T4_1_2);
+    [item4$2] (T4_2_2);
+    [item5$1] (T5_1_2);
+    [item5$2] (T5_2_2);
+    [item6$1] (T6_1_2);
+    [item6$2] (T6_2_2);
+
+    [f];
+    f;
+
+
+    %c#3%
+    f BY item1*(L1);
+    f BY item2*(L_23);
+    f BY item3*(L_33);
+    f BY item4*(L_43);
+    f BY item5*(L_53);
+    f BY item6*(L_63);
+
+    [item1$1] (T1_1);
+    [item1$2] (T1_2);
+    [item2$1] (T2_1_3);
+    [item2$2] (T2_2_3);
+    [item3$1] (T3_1_3);
+    [item3$2] (T3_2_3);
+    [item3$3] (T3_3_3);
+    [item3$4] (T3_4_3);
+    [item4$1] (T4_1_3);
+    [item4$2] (T4_2_3);
+    [item5$1] (T5_1_3);
+    [item5$2] (T5_2_3);
+    [item6$1] (T6_1_3);
+    [item6$2] (T6_2_3);
+
+    [f@0];
+    f@1;
+
+   %c#4%
+    f BY item1*(L1);
+    f BY item2*(L_24);
+    f BY item3*(L_34);
+    f BY item4*(L_44);
+    f BY item5*(L_54);
+    f BY item6*(L_64);
+
+    [item1$1] (T1_1);
+    [item1$2] (T1_2);
+    [item2$1] (T2_1_4);
+    [item2$2] (T2_2_4);
+    [item3$1] (T3_1_4);
+    [item3$2] (T3_2_4);
+    [item3$3] (T3_3_4);
+    [item3$4] (T3_4_4);
+    [item4$1] (T4_1_4);
+    [item4$2] (T4_2_4);
+    [item5$1] (T5_1_4);
+    [item5$2] (T5_2_4);
+    [item6$1] (T6_1_4);
+    [item6$2] (T6_2_4);
+
+    [f];
+    f;
+
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  761
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+MNLFA on LSAC;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4275
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   ITEM1       ITEM2       ITEM3       ITEM4       ITEM5       ITEM6
+
+Continuous latent variables
+   F
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Stratification        STRATUM
+  Cluster variable      PCODES
+  Weight variable       AWEIGHT
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            1
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  LSAC_monograph.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             9
+     Number of y missing data patterns           0
+     Number of u missing data patterns           9
+     Number of strata                           23
+     Number of clusters                        293
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              ITEM1         ITEM2         ITEM3         ITEM4         ITEM5
+              ________      ________      ________      ________      ________
+ ITEM1          1.000
+ ITEM2          0.999         0.999
+ ITEM3          0.996         0.996         0.996
+ ITEM4          0.997         0.997         0.994         0.997
+ ITEM5          0.997         0.997         0.994         0.995         0.997
+ ITEM6          0.999         0.998         0.996         0.997         0.996
+
+
+           Covariance Coverage
+              ITEM6
+              ________
+ ITEM6          0.999
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    ITEM1
+      Category 1    0.014           59.603
+      Category 2    0.213          909.167
+      Category 3    0.773         3305.380
+    ITEM2
+      Category 1    0.061          262.561
+      Category 2    0.422         1802.066
+      Category 3    0.517         2208.357
+    ITEM3
+      Category 1    0.017           71.753
+      Category 2    0.039          164.410
+      Category 3    0.146          622.482
+      Category 4    0.397         1691.457
+      Category 5    0.401         1708.188
+    ITEM4
+      Category 1    0.093          397.602
+      Category 2    0.497         2118.733
+      Category 3    0.410         1747.545
+    ITEM5
+      Category 1    0.067          285.358
+      Category 2    0.400         1706.668
+      Category 3    0.533         2270.071
+    ITEM6
+      Category 1    0.057          242.034
+      Category 2    0.349         1488.943
+      Category 3    0.595         2538.554
+
+
+
+     WARNING:  THE VARIANCE CONTRIBUTION FROM A STRATUM WITH A SINGLE CLUSTER
+     (PSU) IS BASED ON THE DIFFERENCE BETWEEN THE SINGLE CLUSTER VALUE AND
+     THE OVERALL CLUSTER MEAN.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       78
+
+Loglikelihood
+
+          H0 Value                      -24544.744
+          H0 Scaling Correction Factor      1.1551
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   49245.488
+          Bayesian (BIC)                 49741.610
+          Sample-Size Adjusted BIC       49493.759
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes**
+
+          Pearson Chi-Square
+
+          Value                           4434.392
+          Degrees of Freedom                  4754
+          P-Value                           0.9996
+
+          Likelihood Ratio Chi-Square
+
+          Value                           2447.901
+          Degrees of Freedom                  4754
+          P-Value                           1.0000
+
+** Of the 3207 cells in the latent class indicator table, 5
+   were deleted in the calculation of chi-square due to extreme values.
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                           1242.159
+          Degrees of Freedom                  7933
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            478.638
+          Degrees of Freedom                  7933
+          P-Value                           1.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1082.91514          0.25331
+       2       1179.01445          0.27579
+       3       1029.58744          0.24084
+       4        983.48296          0.23005
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ F        BY
+    ITEM1              3.232      0.201     16.070      0.000
+    ITEM2              2.267      0.175     12.981      0.000
+    ITEM3              2.035      0.135     15.102      0.000
+    ITEM4              3.351      0.259     12.952      0.000
+    ITEM5              2.205      0.160     13.770      0.000
+    ITEM6              1.970      0.164     11.988      0.000
+
+ Means
+    F                  0.000      0.000    999.000    999.000
+
+ Thresholds
+    ITEM1$1           -7.835      0.333    -23.510      0.000
+    ITEM1$2           -2.913      0.173    -16.799      0.000
+    ITEM2$1           -4.079      0.257    -15.847      0.000
+    ITEM2$2           -0.092      0.102     -0.903      0.366
+    ITEM3$1           -5.722      0.384    -14.885      0.000
+    ITEM3$2           -4.514      0.244    -18.468      0.000
+    ITEM3$3           -2.624      0.158    -16.651      0.000
+    ITEM3$4            0.393      0.111      3.543      0.000
+    ITEM4$1           -4.772      0.322    -14.808      0.000
+    ITEM4$2            0.461      0.150      3.072      0.002
+    ITEM5$1           -4.062      0.228    -17.793      0.000
+    ITEM5$2           -0.335      0.110     -3.028      0.002
+    ITEM6$1           -4.041      0.204    -19.828      0.000
+    ITEM6$2           -0.717      0.111     -6.464      0.000
+
+ Variances
+    F                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ F        BY
+    ITEM1              3.232      0.201     16.070      0.000
+    ITEM2              3.015      0.301     10.011      0.000
+    ITEM3              2.298      0.242      9.482      0.000
+    ITEM4              3.798      0.513      7.402      0.000
+    ITEM5              2.981      0.380      7.842      0.000
+    ITEM6              2.128      0.279      7.634      0.000
+
+ Means
+    F                 -0.182      0.072     -2.542      0.011
+
+ Thresholds
+    ITEM1$1           -7.835      0.333    -23.510      0.000
+    ITEM1$2           -2.913      0.173    -16.799      0.000
+    ITEM2$1           -5.300      0.381    -13.897      0.000
+    ITEM2$2           -0.702      0.251     -2.798      0.005
+    ITEM3$1           -6.065      0.337    -18.015      0.000
+    ITEM3$2           -4.351      0.287    -15.172      0.000
+    ITEM3$3           -2.571      0.239    -10.751      0.000
+    ITEM3$4            0.193      0.204      0.947      0.343
+    ITEM4$1           -5.347      0.535     -9.991      0.000
+    ITEM4$2            0.101      0.326      0.310      0.756
+    ITEM5$1           -4.839      0.400    -12.113      0.000
+    ITEM5$2           -0.714      0.267     -2.673      0.008
+    ITEM6$1           -4.348      0.302    -14.404      0.000
+    ITEM6$2           -0.965      0.197     -4.902      0.000
+
+ Variances
+    F                  0.695      0.134      5.169      0.000
+
+Latent Class 3 (3)
+
+ F        BY
+    ITEM1              3.232      0.201     16.070      0.000
+    ITEM2              2.518      0.200     12.569      0.000
+    ITEM3              1.969      0.150     13.158      0.000
+    ITEM4              2.906      0.266     10.941      0.000
+    ITEM5              2.054      0.153     13.428      0.000
+    ITEM6              2.232      0.179     12.484      0.000
+
+ Means
+    F                  0.000      0.000    999.000    999.000
+
+ Thresholds
+    ITEM1$1           -7.835      0.333    -23.510      0.000
+    ITEM1$2           -2.913      0.173    -16.799      0.000
+    ITEM2$1           -4.710      0.297    -15.844      0.000
+    ITEM2$2           -0.235      0.131     -1.792      0.073
+    ITEM3$1           -5.608      0.376    -14.927      0.000
+    ITEM3$2           -4.282      0.282    -15.167      0.000
+    ITEM3$3           -2.217      0.160    -13.848      0.000
+    ITEM3$4            0.679      0.117      5.826      0.000
+    ITEM4$1           -4.613      0.339    -13.612      0.000
+    ITEM4$2            0.849      0.157      5.395      0.000
+    ITEM5$1           -4.094      0.218    -18.757      0.000
+    ITEM5$2           -0.308      0.116     -2.649      0.008
+    ITEM6$1           -4.396      0.246    -17.892      0.000
+    ITEM6$2           -0.633      0.123     -5.139      0.000
+
+ Variances
+    F                  1.000      0.000    999.000    999.000
+
+Latent Class 4 (4)
+
+ F        BY
+    ITEM1              3.232      0.201     16.070      0.000
+    ITEM2              2.819      0.314      8.988      0.000
+    ITEM3              2.162      0.250      8.659      0.000
+    ITEM4              3.306      0.438      7.544      0.000
+    ITEM5              2.136      0.301      7.104      0.000
+    ITEM6              2.180      0.272      8.025      0.000
+
+ Means
+    F                 -0.178      0.078     -2.266      0.023
+
+ Thresholds
+    ITEM1$1           -7.835      0.333    -23.510      0.000
+    ITEM1$2           -2.913      0.173    -16.799      0.000
+    ITEM2$1           -5.439      0.438    -12.409      0.000
+    ITEM2$2           -0.762      0.234     -3.263      0.001
+    ITEM3$1           -5.923      0.420    -14.110      0.000
+    ITEM3$2           -4.523      0.306    -14.788      0.000
+    ITEM3$3           -2.341      0.240     -9.767      0.000
+    ITEM3$4            0.317      0.200      1.583      0.113
+    ITEM4$1           -4.980      0.469    -10.624      0.000
+    ITEM4$2            0.263      0.298      0.882      0.378
+    ITEM5$1           -4.428      0.320    -13.850      0.000
+    ITEM5$2           -0.577      0.210     -2.745      0.006
+    ITEM6$1           -4.528      0.328    -13.801      0.000
+    ITEM6$2           -1.038      0.215     -4.820      0.000
+
+ Variances
+    F                  0.716      0.137      5.229      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.096      0.062      1.561      0.119
+    C#2                0.181      0.051      3.533      0.000
+    C#3                0.046      0.046      1.001      0.317
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.408E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  02:35:43
+        Ending Time:  02:35:46
+       Elapsed Time:  00:00:03
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen

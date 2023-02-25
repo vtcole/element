@@ -1,0 +1,42 @@
+title: MNLFA on LSAC;
+  data: file is 'LSAC_monograph.csv';
+  !variable names given here only (not in data file)
+  variable: names are
+  hicid cohort wave  aweight aweights stratum  pcodes zf12m2 
+  ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+  usevariables = Item1 Item2 Item3 Item4 Item5 Item6;
+  categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+  class is c(4);
+  knownclass is c(agegroup=1 agegroup=2 agegroup=3 agegroup=4);
+  missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+  weight=aweight; ! sample weights
+  stratification=stratum; ! stratum & postal code are used to account for sample design
+  cluster=pcodes;
+  analysis: 
+  type = mixture complex;
+  algorithm = integration;
+  model:
+  
+  %OVERALL%
+  f BY item1*;
+  f BY item2;
+  f BY item3;
+  f BY item4;
+  f BY item5;
+  f BY item6;
+  
+  %c#1%
+  [f@0];
+  f@1;
+
+  %c#2%
+  [f];
+  f;
+
+  %c#3%
+  [f];
+  f;
+  
+  %c#4%
+  [f];
+  f;

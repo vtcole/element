@@ -1,0 +1,54 @@
+title: MNLFA on LSAC;
+  data: file is 'LSAC_monograph.csv';
+  !variable names given here only (not in data file)
+  variable: names are
+  hicid cohort wave  aweight aweights stratum  pcodes zf12m2 
+  ascagew zf02m1 Item1 Item2 Item3 Item4 Item5 Item6 mom male agegroup;
+  usevariables = Item1 Item2 Item3 Item4 Item5 Item6 
+  age100 dad;
+  categorical are Item1 Item2 Item3 Item4 Item5 Item6;
+  constraint are age100 dad;
+  missing=all(-55555); !missing indicator. We used "-55555" to indicate missing
+  weight=aweight; ! sample weights
+  stratification=stratum; ! stratum & postal code are used to account for sample design
+  cluster=pcodes;
+  define:
+  age100 = ascagew/100;
+  dad = (2 - (mom + 1));
+  analysis: 
+  type = complex;
+  algorithm = integration;
+  model:
+  
+  f BY item1*(L1);
+  f BY item2*(L2);
+  f BY item3*(L3);
+  f BY item4*(L4);
+  f BY item5*(L5);
+  f BY item6*(L6);
+
+
+  item1 ON dad;
+  item2 ON age100;
+  item3 ON dad age100;
+  item4 ON dad age100;
+  item5 ON age100;
+
+  [f@0];
+  f(v);
+
+  f ON dad;
+
+model constraint:
+  new( 
+  L10 L12
+  L40 L43
+  L50 L53
+  v2
+  );
+
+  L1 = L10 + L12*dad;
+  L4 = L40 + L43*age100;
+  L5 = L50 + L53*age100;
+
+  v = exp(v2*dad);
